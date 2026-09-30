@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+      }
+
+      .input {
+        color: red;
+        width: 300px;
+        height: 30px;
+        border-radius: 15px;
+        border: 2px solid green;
+        padding-left: 20px;
+        margin-bottom: 20px;
+      }
+      .head-1 {
+        color: yellowgreen;
+        margin-bottom: 20px;
+      }
+      .divlabela {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .labela {
+        color: lawngreen;
+      }
+      .btn {
+        background-color: green;
+        color: red;
+        border-radius: 8px;
+        padding: 10px 18px;
+        border: none;
+        margin-bottom: 20px;
+      }
+      .btn:hover {
+        color: forestgreen;
+        color: darkred;
+      }
+
+      .div-a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .parent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: brown;
+        width: 500px;
+        min-height: 500px;
+      }
+      .para {
+        color: lightgreen;
+      }
+      .para:hover {
+        color: greenyellow;
+      }
+      body {
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 70px;
+      }
+
+      .wrong {
+        background-color: red;
+      }
+      .right {
+        background-color: green;
+      }
+      @media (max-width: 900px) {
+        .parent {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body class="body">
+    <div class="parent">
+      <div>
+        <h1 class="head-1">Guessing Game ?</h1>
+      </div>
+
+      <form action="">
+        <div class="divlabela">
+          <label class="labela" for="">Number:</label>
+        </div>
+        <input
+          class="input"
+          type="number"
+          name=""
+          placeholder="Please Enter a Number"
+        />
+        <div class="div-a">
+          <button class="btn">Submit</button>
+        </div>
+      </form>
+      <p class="para"></p>
+      <p class="highscore">Highscore: <span class="score">10</span></p>
+      <button class="reset">Reset</button>
+    </div>
+    <script>
+      const input = document.querySelector(".input");
+      const btn = document.querySelector(".btn");
+      const para = document.querySelector(".para");
+      const body = document.querySelector(".body");
+      const score = document.querySelector(".score");
+      const reset = document.querySelector(".reset");
+      let highscore = 10;
+      let Gamestart = true;
+
+      let randomnumber = Math.floor(Math.random() * 20) + 1;
+      console.log(randomnumber);
+      btn.addEventListener("click", function () {
+        event.preventDefault();
+        console.log(Gamestart);
+        if (Gamestart === true) {
+          if (input.value == randomnumber) {
+            para.textContent = "you win the Game";
+            body.classList.add("right");
+            Gamestart = false;
+          } else if (input.value > randomnumber) {
+            para.textContent = "Your number is higher than the random number";
+            body.classList.add("wrong");
+            highscore--;
+            score.textContent = highscore;
+          } else if (input.value < randomnumber) {
+            para.textContent = "Your number is lower than the random number";
+            body.classList.add("wrong");
+            highscore--;
+            score.textContent = highscore;
+          }
+        }
+      });
+      reset.addEventListener("click", function () {
+        event.preventDefault();
+        Gamestart = true;
+        input.value = "";
+        highscore = 10;
+        score.textContent = highscore;
+        randomnumber = Math.floor(Math.random() * 20) + 1;
+        console.log(randomnumber);
+        body.classList.remove("right");
+        body.classList.remove("wrong");
+        // console.log("click on a Reset button");
+      });
+    </script>
+  </body>
+</html>
